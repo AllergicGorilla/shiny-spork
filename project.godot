@@ -27,6 +27,12 @@ config/icon="res://icon.png"
 [autoload]
 
 Tools="*res://gui/tools/Tools.gd"
+CreatePlanetTool="*res://gui/tools/CreatePlanetTool.tscn"
+
+[display]
+
+window/size/width=1920
+window/size/height=1080
 
 [input]
 

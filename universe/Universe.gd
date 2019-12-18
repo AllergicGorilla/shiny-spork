@@ -5,7 +5,7 @@ export (PackedScene) var Planet
 var VIEWPHYSICS: bool = true
 var prevMousePos = Vector2()
 onready var tools = get_node("/root/Tools")
-onready var createPlanetTool = tools.CreatePlanetTool.instance()
+onready var createPlanetTool = get_node("/root/CreatePlanetTool")
 
 func _ready():
 	add_child(createPlanetTool)
@@ -40,8 +40,8 @@ func _on_peekPhysics_pressed():
 		var force = p1.get_node("ForceVector")
 		vel.visible = VIEWPHYSICS
 		force.visible = VIEWPHYSICS
-func _on_Area2D_body_exited(body):
-	body.get_parent().queue_free()
+#func _on_Area2D_body_exited(body):
+	#body.get_parent().queue_free()
 
 func _on_createPlanet_pressed():
 	tools.current = tools.TOOL.createPlanet

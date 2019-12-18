@@ -9,6 +9,8 @@ var state = STATE.initial
 var center: Vector2 setget set_center
 var radiusPoint: Vector2 setget set_radius_point
 var velocityPoint: Vector2 setget set_velocity_point
+var newPlanetColor = Color(255,0,0)
+var newMass = 1.0
 
 func next_state():
 	state = (state + 1) % STATE.size()
@@ -61,6 +63,8 @@ func handle_input(event):
 				#CREATE PLANET#
 				var planet = Planet.instance()
 				var body = planet.get_node("Body")
+				body.mass = newMass
+				body.color = newPlanetColor
 				body.position = center
 				body.linear_velocity = get_velocity()
 				body.radius = get_radius()
@@ -85,3 +89,13 @@ func _draw():
 		draw_polyline(points_circle, Color(255,0,0))
 func _process(delta):
 	update()
+	
+func _on_mass_entered(mass):
+	newMass = mass
+func _on_color_entered(color):
+	newPlanetColor = color
+
+
+
+
+

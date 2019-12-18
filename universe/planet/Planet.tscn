@@ -21,7 +21,12 @@ __meta__ = {
 shape = SubResource( 1 )
 
 [node name="VelocityVector" parent="." instance=ExtResource( 2 )]
+origin = Vector2( 0, 0 )
+tip = Vector2( 1, 0 )
+color = Color( 0, 255, 0, 1 )
 
 [node name="ForceVector" parent="." instance=ExtResource( 2 )]
+origin = Vector2( 0, 0 )
+tip = Vector2( 1, 0 )
 color = Color( 255, 0, 0, 1 )
 [connection signal="input_event" from="Body" to="Body" method="_on_Body_input_event"]
