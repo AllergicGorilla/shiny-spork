@@ -1,0 +1,54 @@
+[gd_scene format=2]
+
+[node name="GUI" type="MarginContainer"]
+anchor_right = 1.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 1024.0
+margin_bottom = 20.0
+alignment = 1
+
+[node name="boxes" type="HBoxContainer" parent="HBoxContainer"]
+margin_right = 541.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/boxes"]
+margin_bottom = 20.0
+color = Color( 0.14902, 1, 0, 1 )
+
+[node name="buttons" type="HBoxContainer" parent="HBoxContainer"]
+margin_left = 545.0
+margin_right = 1024.0
+margin_bottom = 20.0
+
+[node name="createPlanet" type="Button" parent="HBoxContainer/buttons"]
+margin_right = 97.0
+margin_bottom = 20.0
+text = "Create planet"
+
+[node name="freeCursor" type="Button" parent="HBoxContainer/buttons"]
+margin_left = 101.0
+margin_right = 185.0
+margin_bottom = 20.0
+text = "Free cursor"
+
+[node name="applyForce" type="Button" parent="HBoxContainer/buttons"]
+margin_left = 189.0
+margin_right = 283.0
+margin_bottom = 20.0
+text = "Apply Forces"
+
+[node name="peekPhysics" type="Button" parent="HBoxContainer/buttons"]
+margin_left = 287.0
+margin_right = 378.0
+margin_bottom = 20.0
+text = "peekPhysics"
+
+[node name="followPlanet" type="Button" parent="HBoxContainer/buttons"]
+margin_left = 382.0
+margin_right = 479.0
+margin_bottom = 20.0
+text = "Follow Planet"

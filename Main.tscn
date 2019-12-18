@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Camera2D.gd" type="Script" id=1]
-[ext_resource path="res://Universe.gd" type="Script" id=2]
-[ext_resource path="res://Planet.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Arrow.tscn" type="PackedScene" id=4]
-[ext_resource path="res://GUI.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Label.gd" type="Script" id=6]
+[ext_resource path="res://gui/Camera2D.gd" type="Script" id=1]
+[ext_resource path="res://universe/Universe.gd" type="Script" id=2]
+[ext_resource path="res://universe/planet/Planet.tscn" type="PackedScene" id=3]
+[ext_resource path="res://gui/GUI.tscn" type="PackedScene" id=4]
+[ext_resource path="res://universe/planet/Label.gd" type="Script" id=5]
 
 [node name="Main" type="Node"]
 
@@ -20,11 +19,8 @@ script = ExtResource( 1 )
 script = ExtResource( 2 )
 Planet = ExtResource( 3 )
 
-[node name="velocityLine" parent="Universe" instance=ExtResource( 4 )]
-visible = false
-color = Color( 0, 21.9141, 255, 1 )
-
 [node name="Area2D" type="Area2D" parent="Universe"]
+editor/display_folded = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Universe/Area2D"]
 visible = false
@@ -33,12 +29,13 @@ polygon = PoolVector2Array( -10, -11, 1030, -11, 1030, 609, -10, 609 )
 
 [node name="GUILayer" type="CanvasLayer" parent="."]
 
-[node name="GUI" parent="GUILayer" instance=ExtResource( 5 )]
+[node name="GUI" parent="GUILayer" instance=ExtResource( 4 )]
+editor/display_folded = true
 
 [node name="PlanetLabel" type="Label" parent="."]
 margin_right = 40.0
 margin_bottom = 14.0
-script = ExtResource( 6 )
+script = ExtResource( 5 )
 [connection signal="body_exited" from="Universe/Area2D" to="Universe" method="_on_Area2D_body_exited"]
 [connection signal="pressed" from="GUILayer/GUI/HBoxContainer/buttons/createPlanet" to="Universe" method="_on_createPlanet_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/HBoxContainer/buttons/freeCursor" to="Universe" method="_on_freeCursor_pressed"]

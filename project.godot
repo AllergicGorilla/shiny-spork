@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "Newton",
 "language": "GDScript",
-"path": "res://newton_physics.gd"
+"path": "res://math/NewtonPhysics.gd"
 } ]
 _global_script_class_icons={
 "Newton": ""
@@ -26,7 +26,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Tools="*res://Tools.gd"
+Tools="*res://gui/tools/Tools.gd"
 
 [input]
 
