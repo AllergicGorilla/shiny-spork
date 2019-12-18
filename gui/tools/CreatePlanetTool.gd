@@ -48,7 +48,6 @@ func handle_input(event):
 	#Second click: sets the radius
 	#Third click: sets the velocity
 	if event.is_action_pressed("leftMouseClick"):
-		print(state)
 		match state:
 			STATE.initial:
 				set_center(get_global_mouse_position())
@@ -94,8 +93,3 @@ func _on_mass_entered(mass):
 	newMass = mass
 func _on_color_entered(color):
 	newPlanetColor = color
-
-
-
-
-

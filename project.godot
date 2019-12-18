@@ -10,11 +10,17 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Reference",
+"class": "GeometryMath",
+"language": "GDScript",
+"path": "res://math/GeometryMath.gd"
+}, {
+"base": "Reference",
 "class": "Newton",
 "language": "GDScript",
 "path": "res://math/NewtonPhysics.gd"
 } ]
 _global_script_class_icons={
+"GeometryMath": "",
 "Newton": ""
 }
 
