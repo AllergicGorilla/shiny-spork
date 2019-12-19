@@ -1,7 +1,9 @@
 extends Node
 enum TOOL{createPlanet, freeCursor, applyForce, peekPhysics, followPlanet}
+enum PLANET_CREATION_MODE{clickAndDrag, threeSteps}
 
 var current = TOOL.freeCursor
+var mode = PLANET_CREATION_MODE.clickAndDrag
 var currentPlanetBody: RigidBody2D setget currentPlanetBody_set
 
 signal currentPlanetBody_changed

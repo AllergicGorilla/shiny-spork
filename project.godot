@@ -35,6 +35,7 @@ config/icon="res://icon.png"
 Tools="*res://gui/tools/Tools.gd"
 CreatePlanetTool="*res://gui/tools/CreatePlanetTool.tscn"
 ThreeStepsPlanetCreatorTool="*res://gui/tools/ThreeStepsPlanetCreatorTool.tscn"
+ClickAndDragPlanetCreator="*res://gui/tools/ClickAndDragPlanetCreator.tscn"
 
 [display]
 

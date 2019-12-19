@@ -13,10 +13,7 @@ onready var tools = get_node("/root/Tools")
 onready var createPlanetTool = get_node("/root/CreatePlanetTool")
 
 func _unhandled_input(event):
-	#The create planet tool will create a planet given
-	#a starting position,radius and initial velocity,
-	#all given by consecutive mouse clicks
-	if tools.current == tools.TOOL.createPlanet:
+	if tools.current == tools.TOOL.createPlanet and tools.mode == tools.PLANET_CREATION_MODE.threeSteps:
 		handle_input(event)
 
 func next_state():
