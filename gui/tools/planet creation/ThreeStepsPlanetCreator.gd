@@ -1,5 +1,7 @@
 extends Node2D
 
+signal new_planet_requested
+
 enum STATE{initial, setRadius, setVelocity}
 
 var state = STATE.initial
@@ -8,8 +10,6 @@ var radiusPoint: Vector2 setget set_radius_point
 var velocityPoint: Vector2 setget set_velocity_point
 var newPlanetColor = Color(255,0,0)
 var newMass = 1.0
-
-onready var createPlanetTool = get_node("/root/Main/CreatePlanetTool")
 
 func next_state():
 	state = (state + 1) % STATE.size()
@@ -58,7 +58,7 @@ func handle_input(event, tools):
 				next_state()
 			STATE.setVelocity:
 				set_velocity_point(get_global_mouse_position())
-				createPlanetTool.create_planet(tools.gui_to_world_pos(center), get_velocity(), get_radius())
+				emit_signal("new_planet_requested", center, get_velocity(), get_radius())
 				next_state()
 	elif event is InputEventMouseMotion:
 		match state:

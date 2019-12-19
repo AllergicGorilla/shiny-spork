@@ -1,5 +1,7 @@
 extends Node2D
 
+signal new_planet_requested
+
 enum STATE{free, dragging}
 
 var state = STATE.free
@@ -38,7 +40,7 @@ func handle_input(event, tools):
 		if state == STATE.dragging:
 			$VelocityArrow.hide()
 			set_velocity_point(get_global_mouse_position())
-			createPlanetTool.create_planet(tools.gui_to_world_pos(center), get_velocity())
+			emit_signal("new_planet_requested", center, get_velocity())
 			next_state()
 	elif event is InputEventMouseMotion:
 		if state == STATE.dragging:

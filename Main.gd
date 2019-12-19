@@ -3,15 +3,18 @@ extends Node
 onready var universe = $Universe
 onready var tools = $Tools
 onready var createPlanetTool = $CreatePlanetTool
+onready var clickAndDragPlanetCreator = $GUILayer/GUI/ClickAndDragPlanetCreator
+onready var threeStepsPlanetCreator = $GUILayer/GUI/ThreeStepsPlanetCreator
 
 func _ready():
 	createPlanetTool.connect("planet_created",self,"_on_planet_created")
+	
 func _unhandled_input(event):
 	if tools.current == tools.TOOL.createPlanet:
 		if tools.mode == tools.PLANET_CREATION_MODE.clickAndDrag:
-			$GUILayer/GUI/ClickAndDragPlanetCreator.handle_input(event, tools)
+			clickAndDragPlanetCreator.handle_input(event, tools)
 		elif tools.mode == tools.PLANET_CREATION_MODE.threeSteps:
-			$GUILayer/GUI/ThreeStepsPlanetCreator.handle_input(event, tools)
+			threeStepsPlanetCreator.handle_input(event, tools)
 
 #SIGNAL HANDLING
 func _on_planet_created(newPlanet):
@@ -24,5 +27,3 @@ func _on_ClickAndDrag_pressed():
 	tools.mode = tools.PLANET_CREATION_MODE.clickAndDrag
 func _on_ThreeSteps_pressed():
 	tools.mode = tools.PLANET_CREATION_MODE.threeSteps
-func _on_ColorPicker_color_changed(color):
-	pass # Replace with function body.
