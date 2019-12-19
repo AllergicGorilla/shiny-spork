@@ -22,9 +22,9 @@ func gui_to_world_pos(pos):
 
 func _on_color_entered(color):
 	newPlanetColor = color
-func _on_MassLineEdit_mass_entered(mass):
+func _on_mass_entered(mass):
 	newMass = mass
-
-
+func _on_radius_entered(radius):
+	newRadius = radius
 func _on_new_planet_requested(guiPos, vel, radius = newRadius, mass = newMass, color = newPlanetColor):
 	create_planet(gui_to_world_pos(guiPos),vel,radius, mass, color)

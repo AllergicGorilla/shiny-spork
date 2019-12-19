@@ -35,7 +35,8 @@ disabled = true
 
 [node name="GUI" parent="GUILayer" instance=ExtResource( 6 )]
 [connection signal="body_exited" from="Universe/Area2D" to="Universe" method="_on_Area2D_body_exited"]
-[connection signal="mass_entered" from="GUILayer/GUI/PlanetCreatorPanel/HBoxContainer/VBoxContainer/MassLineEdit" to="CreatePlanetTool" method="_on_MassLineEdit_mass_entered"]
+[connection signal="mass_entered" from="GUILayer/GUI/PlanetCreatorPanel/HBoxContainer/VBoxContainer/MassEditor" to="CreatePlanetTool" method="_on_mass_entered"]
+[connection signal="radius_entered" from="GUILayer/GUI/PlanetCreatorPanel/HBoxContainer/VBoxContainer/RadiusEditor" to="CreatePlanetTool" method="_on_radius_entered"]
 [connection signal="color_changed" from="GUILayer/GUI/PlanetCreatorPanel/HBoxContainer/PlanetColorPicker/ColorPicker" to="CreatePlanetTool" method="_on_color_entered"]
 [connection signal="pressed" from="GUILayer/GUI/PlanetCreatorPanel/HBoxContainer/VBoxContainer2/ClickAndDrag" to="." method="_on_ClickAndDrag_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/PlanetCreatorPanel/HBoxContainer/VBoxContainer2/ThreeSteps" to="." method="_on_ThreeSteps_pressed"]
