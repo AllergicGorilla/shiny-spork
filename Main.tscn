@@ -44,7 +44,7 @@ script = ExtResource( 4 )
 [connection signal="pressed" from="GUILayer/GUI/HBoxContainer/toolButtons/createPlanet" to="Tools" method="_on_createPlanet_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/HBoxContainer/toolButtons/freeCursor" to="Tools" method="_on_freeCursor_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/HBoxContainer/toolButtons/applyForce" to="Tools" method="_on_applyForce_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/HBoxContainer/toolButtons/peekPhysics" to="Tools" method="_on_peekPhysics_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/HBoxContainer/toolButtons/peekPhysics" to="Universe" method="_on_peekPhysics_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/HBoxContainer/toolButtons/followPlanet" to="Tools" method="_on_followPlanet_pressed"]
 
 [editable path="GUILayer/GUI"]
