@@ -9,12 +9,7 @@ var velocityPoint: Vector2 setget set_velocity_point
 var newPlanetColor = Color(255,0,0)
 var newMass = 1.0
 
-onready var tools = get_node("/root/Main/Tools")
 onready var createPlanetTool = get_node("/root/Main/CreatePlanetTool")
-
-func _unhandled_input(event):
-	if tools.current == tools.TOOL.createPlanet and tools.mode == tools.PLANET_CREATION_MODE.threeSteps:
-		handle_input(event)
 
 func next_state():
 	state = (state + 1) % STATE.size()
@@ -44,7 +39,7 @@ func get_radius():
 	return (radiusPoint - center).length()
 	
 	
-func handle_input(event):
+func handle_input(event, tools):
 	#This is game logic to display arrows (representing either the starting radius or velocity)
 	#whenever the player clicks and moves their mouse
 	#during the creation of a new Planet

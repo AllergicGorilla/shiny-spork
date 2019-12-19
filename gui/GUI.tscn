@@ -62,4 +62,4 @@ text = "Follow Planet"
 
 [node name="ClickAndDragPlanetCreator" parent="." instance=ExtResource( 2 )]
 
-[node name="ThreeStepsPlanetCreatorTool" parent="." instance=ExtResource( 3 )]
+[node name="ThreeStepsPlanetCreator" parent="." instance=ExtResource( 3 )]

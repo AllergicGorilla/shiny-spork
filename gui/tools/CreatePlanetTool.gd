@@ -7,7 +7,7 @@ var newPlanetColor = Color(255,0,0)
 var newMass = 1.0
 var newRadius = 10.0
 
-func create_planet(pos, vel, radius = newRadius, mass= newMass, color = newPlanetColor):
+func create_planet(pos, vel, radius = newRadius, mass = newMass, color = newPlanetColor):
 	var planet = Planet.instance()
 	var body = planet.get_node("Body")
 	body.mass = mass

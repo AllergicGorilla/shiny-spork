@@ -12,6 +12,7 @@ resource_local_to_scene = true
 script = ExtResource( 1 )
 
 [node name="Body" type="RigidBody2D" parent="."]
+editor/display_folded = true
 input_pickable = true
 gravity_scale = 0.0
 can_sleep = false
@@ -34,14 +35,16 @@ remote_path = NodePath("../../Following")
 update_rotation = false
 
 [node name="VelocityVector" parent="." instance=ExtResource( 4 )]
+z_index = 1
 
 [node name="ForceVector" parent="." instance=ExtResource( 4 )]
+z_index = 1
 color = Color( 255, 0, 0, 1 )
 
 [node name="Following" type="Node2D" parent="."]
+z_index = 2
 
 [node name="Label" type="Label" parent="Following"]
 margin_right = 76.0
 margin_bottom = 14.0
-text = "Hello World"
 [connection signal="input_event" from="Body" to="." method="_on_Body_input_event"]

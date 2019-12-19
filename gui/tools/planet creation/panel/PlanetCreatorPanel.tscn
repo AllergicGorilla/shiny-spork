@@ -31,19 +31,19 @@ margin_right = 58.0
 margin_bottom = 57.0
 script = ExtResource( 1 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+[node name="PlanetColorPicker" type="HBoxContainer" parent="HBoxContainer"]
 margin_left = 62.0
 margin_right = 207.0
 margin_bottom = 72.0
 size_flags_horizontal = 0
 
-[node name="PickColor" type="Label" parent="HBoxContainer/HBoxContainer"]
+[node name="PickColor" type="Label" parent="HBoxContainer/PlanetColorPicker"]
 margin_top = 29.0
 margin_right = 66.0
 margin_bottom = 43.0
 text = "Pick color:"
 
-[node name="ColorPicker" type="ColorPickerButton" parent="HBoxContainer/HBoxContainer"]
+[node name="ColorPicker" type="ColorPickerButton" parent="HBoxContainer/PlanetColorPicker"]
 margin_left = 70.0
 margin_right = 145.0
 margin_bottom = 72.0

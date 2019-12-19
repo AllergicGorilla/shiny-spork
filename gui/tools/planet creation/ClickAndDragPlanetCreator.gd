@@ -6,15 +6,7 @@ var state = STATE.free
 var center: Vector2 setget set_center
 var velocityPoint: Vector2 setget set_velocity_point
 
-onready var tools = get_node("/root/Main/Tools")
 onready var createPlanetTool = get_node("/root/Main/CreatePlanetTool")
-
-func _unhandled_input(event):
-	#The create planet tool will create a planet given
-	#a starting position,radius and initial velocity,
-	#all given by consecutive mouse clicks
-	if tools.current == tools.TOOL.createPlanet and tools.mode == tools.PLANET_CREATION_MODE.clickAndDrag:
-		handle_input(event)
 
 func next_state():
 	state = (state + 1) % STATE.size()
@@ -35,7 +27,7 @@ func get_velocity():
 	return $VelocityArrow.tip - center
 	
 	
-func handle_input(event):
+func handle_input(event, tools):
 	if event.is_action_pressed("leftMouseClick"):
 		if state == STATE.free:
 			set_center(get_global_mouse_position())
