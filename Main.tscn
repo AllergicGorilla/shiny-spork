@@ -1,15 +1,16 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://gui/Camera2D.gd" type="Script" id=1]
 [ext_resource path="res://Universe.gd" type="Script" id=2]
 [ext_resource path="res://objects/planet/Planet.tscn" type="PackedScene" id=3]
-[ext_resource path="res://gui/GUI.tscn" type="PackedScene" id=4]
-[ext_resource path="res://objects/planet/Label.gd" type="Script" id=5]
+[ext_resource path="res://objects/planet/Label.gd" type="Script" id=4]
+[ext_resource path="res://gui/tools/Tools.tscn" type="PackedScene" id=5]
+[ext_resource path="res://gui/tools/CreatePlanetTool.tscn" type="PackedScene" id=6]
+[ext_resource path="res://gui/GUI.tscn" type="PackedScene" id=7]
 
 [node name="Main" type="Node"]
 
 [node name="MainCamera" type="Camera2D" parent="."]
-position = Vector2( 510, 300 )
 current = true
 drag_margin_h_enabled = false
 drag_margin_v_enabled = false
@@ -27,19 +28,23 @@ position = Vector2( 0, 1 )
 polygon = PoolVector2Array( -10, -11, 1930, -11, 1930, 1089, -10, 1089 )
 disabled = true
 
-[node name="GUILayer" type="CanvasLayer" parent="."]
-
-[node name="GUI" parent="GUILayer" instance=ExtResource( 4 )]
-
 [node name="PlanetLabel" type="Label" parent="."]
 margin_right = 40.0
 margin_bottom = 14.0
-script = ExtResource( 5 )
+script = ExtResource( 4 )
+
+[node name="Tools" parent="." instance=ExtResource( 5 )]
+
+[node name="CreatePlanetTool" parent="." instance=ExtResource( 6 )]
+
+[node name="GUILayer" type="CanvasLayer" parent="."]
+
+[node name="GUI" parent="GUILayer" instance=ExtResource( 7 )]
 [connection signal="body_exited" from="Universe/Area2D" to="Universe" method="_on_Area2D_body_exited"]
-[connection signal="pressed" from="GUILayer/GUI/HBoxContainer/buttons/createPlanet" to="Universe" method="_on_createPlanet_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/HBoxContainer/buttons/freeCursor" to="Universe" method="_on_freeCursor_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/HBoxContainer/buttons/applyForce" to="Universe" method="_on_applyForce_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/HBoxContainer/buttons/peekPhysics" to="Universe" method="_on_peekPhysics_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/HBoxContainer/buttons/followPlanet" to="Universe" method="_on_followPlanet_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/HBoxContainer/toolButtons/createPlanet" to="Tools" method="_on_createPlanet_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/HBoxContainer/toolButtons/freeCursor" to="Tools" method="_on_freeCursor_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/HBoxContainer/toolButtons/applyForce" to="Tools" method="_on_applyForce_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/HBoxContainer/toolButtons/peekPhysics" to="Tools" method="_on_peekPhysics_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/HBoxContainer/toolButtons/followPlanet" to="Tools" method="_on_followPlanet_pressed"]
 
 [editable path="GUILayer/GUI"]

@@ -1,5 +1,5 @@
 extends Label
-onready var tools = get_node("/root/Tools")
+onready var tools = get_node("/root/Main/Tools")
 onready var Body = tools.currentPlanetBody
 
 var mainText = "Speed: %.2f, Force: %.2f"

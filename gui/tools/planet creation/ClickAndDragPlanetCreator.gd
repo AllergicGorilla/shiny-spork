@@ -5,11 +5,9 @@ enum STATE{free, dragging}
 var state = STATE.free
 var center: Vector2 setget set_center
 var velocityPoint: Vector2 setget set_velocity_point
-var newPlanetColor = Color(255,0,0)
-var newMass = 1.0
 
-onready var tools = get_node("/root/Tools")
-onready var createPlanetTool = get_node("/root/CreatePlanetTool")
+onready var tools = get_node("/root/Main/Tools")
+onready var createPlanetTool = get_node("/root/Main/CreatePlanetTool")
 
 func _unhandled_input(event):
 	#The create planet tool will create a planet given
@@ -44,11 +42,16 @@ func handle_input(event):
 			set_velocity_point(get_global_mouse_position())
 			next_state()
 			$VelocityArrow.show()
+			print(get_viewport().canvas_transform)
 	elif event.is_action_released("leftMouseClick"):
 		if state == STATE.dragging:
 			$VelocityArrow.hide()
 			set_velocity_point(get_global_mouse_position())
-			createPlanetTool.create_planet(center, get_velocity())
+			print(center)
+			print(get_global_mouse_position())
+			print(event.position)
+			print(get_viewport().get_mouse_position())
+			createPlanetTool.create_planet(tools.gui_to_world_pos(center), get_velocity())
 			next_state()
 	elif event is InputEventMouseMotion:
 		if state == STATE.dragging:
@@ -58,5 +61,3 @@ func handle_input(event):
 	#var points_circle = GeometryMath.generate_circle(32, center, get_radius())
 	#if state == STATE.setRadius or state == STATE.setVelocity:
 	#	draw_polyline(points_circle, Color(255,0,0))
-#func _process(delta):
-#	update()

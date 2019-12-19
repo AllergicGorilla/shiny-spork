@@ -4,8 +4,8 @@ export (PackedScene) var Planet
 
 var VIEWPHYSICS: bool = true
 var prevMousePos = Vector2()
-onready var tools = get_node("/root/Tools")
-onready var createPlanetTool = get_node("/root/CreatePlanetTool")
+onready var tools = get_node("/root/Main/Tools")
+onready var createPlanetTool = get_node("/root/Main/CreatePlanetTool")
 
 func _ready():
 	add_child(createPlanetTool)
@@ -36,14 +36,6 @@ func _on_peekPhysics_pressed():
 #func _on_Area2D_body_exited(body):
 	#body.get_parent().queue_free()
 
-func _on_createPlanet_pressed():
-	tools.current = tools.TOOL.createPlanet
-func _on_freeCursor_pressed():
-	tools.current = tools.TOOL.freeCursor
-func _on_applyForce_pressed():
-	tools.current = tools.TOOL.applyForce
-func _on_followPlanet_pressed():
-	tools.current = tools.TOOL.followPlanet
 func _on_planet_created(newPlanet):
 	newPlanet.add_to_group("planets")
 	add_child(newPlanet)

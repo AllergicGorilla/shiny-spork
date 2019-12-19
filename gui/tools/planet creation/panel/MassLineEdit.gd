@@ -1,5 +1,5 @@
 extends LineEdit
-onready var createPlanetTool = get_node("/root/CreatePlanetTool")
+onready var createPlanetTool = get_node("/root/Main/CreatePlanetTool")
 
 signal mass_entered
 

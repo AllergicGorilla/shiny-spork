@@ -1,6 +1,6 @@
 extends Camera2D
 
-onready var tools = get_node("/root/Tools")
+onready var tools = get_node("../Tools")
 onready var Body = tools.currentPlanetBody
 
 const speed = 200.0
@@ -16,6 +16,7 @@ func _process(delta):
 		position = Body.position
 	else:
 		if Input.is_action_pressed("camera_up"):
+			print(get_viewport().canvas_transform)
 			position.y -= speed*delta
 		if Input.is_action_pressed("camera_down"):
 			position.y += speed*delta

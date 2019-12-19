@@ -9,8 +9,8 @@ var velocityPoint: Vector2 setget set_velocity_point
 var newPlanetColor = Color(255,0,0)
 var newMass = 1.0
 
-onready var tools = get_node("/root/Tools")
-onready var createPlanetTool = get_node("/root/CreatePlanetTool")
+onready var tools = get_node("/root/Main/Tools")
+onready var createPlanetTool = get_node("/root/Main/CreatePlanetTool")
 
 func _unhandled_input(event):
 	if tools.current == tools.TOOL.createPlanet and tools.mode == tools.PLANET_CREATION_MODE.threeSteps:
@@ -63,7 +63,7 @@ func handle_input(event):
 				next_state()
 			STATE.setVelocity:
 				set_velocity_point(get_global_mouse_position())
-				createPlanetTool.create_planet(center, get_velocity(), get_radius())
+				createPlanetTool.create_planet(tools.gui_to_world_pos(center), get_velocity(), get_radius())
 				next_state()
 	elif event is InputEventMouseMotion:
 		match state:

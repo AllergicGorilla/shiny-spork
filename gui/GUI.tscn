@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://gui/tools/planet creation/panel/PlanetCreatorPanel.tscn" type="PackedScene" id=1]
-
-
+[ext_resource path="res://gui/tools/planet creation/ClickAndDragPlanetCreator.tscn" type="PackedScene" id=2]
+[ext_resource path="res://gui/tools/planet creation/ThreeStepsPlanetCreator.tscn" type="PackedScene" id=3]
 
 [node name="GUI" type="Control"]
 anchor_right = 1.0
@@ -26,36 +26,40 @@ margin_left = -1920.0
 margin_bottom = 20.0
 alignment = 2
 
-[node name="buttons" type="HBoxContainer" parent="HBoxContainer"]
+[node name="toolButtons" type="HBoxContainer" parent="HBoxContainer"]
 margin_left = 1441.0
 margin_right = 1920.0
 margin_bottom = 20.0
 
-[node name="createPlanet" type="Button" parent="HBoxContainer/buttons"]
+[node name="createPlanet" type="Button" parent="HBoxContainer/toolButtons"]
 margin_right = 97.0
 margin_bottom = 20.0
 text = "Create planet"
 
-[node name="freeCursor" type="Button" parent="HBoxContainer/buttons"]
+[node name="freeCursor" type="Button" parent="HBoxContainer/toolButtons"]
 margin_left = 101.0
 margin_right = 185.0
 margin_bottom = 20.0
 text = "Free cursor"
 
-[node name="applyForce" type="Button" parent="HBoxContainer/buttons"]
+[node name="applyForce" type="Button" parent="HBoxContainer/toolButtons"]
 margin_left = 189.0
 margin_right = 283.0
 margin_bottom = 20.0
 text = "Apply Forces"
 
-[node name="peekPhysics" type="Button" parent="HBoxContainer/buttons"]
+[node name="peekPhysics" type="Button" parent="HBoxContainer/toolButtons"]
 margin_left = 287.0
 margin_right = 378.0
 margin_bottom = 20.0
 text = "peekPhysics"
 
-[node name="followPlanet" type="Button" parent="HBoxContainer/buttons"]
+[node name="followPlanet" type="Button" parent="HBoxContainer/toolButtons"]
 margin_left = 382.0
 margin_right = 479.0
 margin_bottom = 20.0
 text = "Follow Planet"
+
+[node name="ClickAndDragPlanetCreator" parent="." instance=ExtResource( 2 )]
+
+[node name="ThreeStepsPlanetCreatorTool" parent="." instance=ExtResource( 3 )]
