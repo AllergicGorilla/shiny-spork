@@ -33,9 +33,9 @@ config/icon="res://icon.png"
 [autoload]
 
 Tools="*res://gui/tools/Tools.gd"
-CreatePlanetTool="*res://gui/tools/CreatePlanetTool.tscn"
-ThreeStepsPlanetCreatorTool="*res://gui/tools/ThreeStepsPlanetCreatorTool.tscn"
-ClickAndDragPlanetCreator="*res://gui/tools/ClickAndDragPlanetCreator.tscn"
+CreatePlanetTool="*res://gui/tools/CreatePlanetTool.gd"
+ThreeStepsPlanetCreatorTool="*res://gui/tools/planet creation/ThreeStepsPlanetCreator.tscn"
+ClickAndDragPlanetCreator="*res://gui/tools/planet creation/ClickAndDragPlanetCreator.tscn"
 
 [display]
 

@@ -1,7 +1,7 @@
 extends Node
 signal planet_created
 
-onready var Planet = preload("res://universe/planet/Planet.tscn")
+onready var Planet = preload("res://objects/planet/Planet.tscn")
 
 var newPlanetColor = Color(255,0,0)
 var newMass = 1.0
