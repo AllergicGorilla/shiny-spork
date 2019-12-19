@@ -11,13 +11,6 @@ func _ready():
 	add_child(createPlanetTool)
 	createPlanetTool.connect("planet_created", self, "_on_planet_created")
 
-func _unhandled_input(event):
-	#The create planet tool will create a planet given
-	#a starting position,radius and initial velocity,
-	#all given by consecutive mouse clicks
-	if tools.current == tools.TOOL.createPlanet:
-		createPlanetTool.handle_input(event)
-
 func _physics_process(delta):
 	#N-body gravitation
 	var planets = get_tree().get_nodes_in_group("planets")
