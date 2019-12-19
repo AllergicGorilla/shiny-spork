@@ -22,8 +22,10 @@ func _on_peekPhysics_pressed():
 	for p1 in planets:
 		var vel = p1.get_node("VelocityVector")
 		var force = p1.get_node("ForceVector")
+		var follow = p1.get_node("Following")
 		vel.visible = VIEWPHYSICS
 		force.visible = VIEWPHYSICS
+		follow.visible = VIEWPHYSICS
 #func _on_Area2D_body_exited(body):
 	#body.get_parent().queue_free()
 
