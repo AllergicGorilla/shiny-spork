@@ -1,10 +1,6 @@
 extends Node2D
 
 var VIEWPHYSICS: bool = true
-onready var createPlanetTool = get_node("/root/Main/CreatePlanetTool")
-
-func _ready():
-	createPlanetTool.connect("planet_created", self, "_on_planet_created")
 
 func _physics_process(delta):
 	#N-body gravitation
@@ -31,6 +27,3 @@ func _on_peekPhysics_pressed():
 #func _on_Area2D_body_exited(body):
 	#body.get_parent().queue_free()
 
-func _on_planet_created(newPlanet):
-	newPlanet.add_to_group("planets")
-	add_child(newPlanet)

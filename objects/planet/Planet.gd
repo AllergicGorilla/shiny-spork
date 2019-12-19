@@ -1,16 +1,19 @@
-tool
-extends Node2D
-export var radius = 10
-"""
-func _ready():
-	$VelocityVector.to = $Body.linear_velocity
-func _process(delta):
-	$VelocityVector.to = $Body.linear_velocity
-	$VelocityVector.position = $Body.position
-	$ForceVector.to = $Body.gravityForce
-	$ForceVector.position = $Body.position
-	update()
+extends Node
 
-func _draw():
-	draw_circle($Body.position, radius, Color(255,0,0))
-"""
+signal planet_selected
+
+var mainText = "Speed: %.2f, Force: %.2f"
+onready var label = $Following/Label
+
+func _process(delta):
+	update_text()
+
+func update_text():
+	var v = get_node("Body").linear_velocity.length()
+	var f = get_node("Body").gravityForce.length()
+	label.text = mainText % [v,f]
+
+func _on_Body_input_event(viewport, event, shape_idx):
+	if event.is_action_pressed("leftMouseClick"):
+		emit_signal("planet_selected", self)
+		print("planet selected")

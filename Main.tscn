@@ -1,22 +1,23 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://gui/Camera2D.gd" type="Script" id=1]
-[ext_resource path="res://Universe.gd" type="Script" id=2]
-[ext_resource path="res://objects/planet/Label.gd" type="Script" id=3]
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://gui/Camera2D.gd" type="Script" id=2]
+[ext_resource path="res://Universe.gd" type="Script" id=3]
 [ext_resource path="res://gui/tools/Tools.tscn" type="PackedScene" id=4]
 [ext_resource path="res://gui/tools/CreatePlanetTool.tscn" type="PackedScene" id=5]
 [ext_resource path="res://gui/GUI.tscn" type="PackedScene" id=6]
 
 [node name="Main" type="Node"]
+script = ExtResource( 1 )
 
 [node name="MainCamera" type="Camera2D" parent="."]
 current = true
 drag_margin_h_enabled = false
 drag_margin_v_enabled = false
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 
 [node name="Universe" type="Node2D" parent="."]
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 
 [node name="Area2D" type="Area2D" parent="Universe"]
 
@@ -25,11 +26,6 @@ visible = false
 position = Vector2( 0, 1 )
 polygon = PoolVector2Array( -10, -11, 1930, -11, 1930, 1089, -10, 1089 )
 disabled = true
-
-[node name="PlanetLabel" type="Label" parent="."]
-margin_right = 40.0
-margin_bottom = 14.0
-script = ExtResource( 3 )
 
 [node name="Tools" parent="." instance=ExtResource( 4 )]
 
