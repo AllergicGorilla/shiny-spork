@@ -1,12 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://gui/Camera2D.gd" type="Script" id=1]
 [ext_resource path="res://Universe.gd" type="Script" id=2]
-[ext_resource path="res://objects/planet/Planet.tscn" type="PackedScene" id=3]
-[ext_resource path="res://objects/planet/Label.gd" type="Script" id=4]
-[ext_resource path="res://gui/tools/Tools.tscn" type="PackedScene" id=5]
-[ext_resource path="res://gui/tools/CreatePlanetTool.tscn" type="PackedScene" id=6]
-[ext_resource path="res://gui/GUI.tscn" type="PackedScene" id=7]
+[ext_resource path="res://objects/planet/Label.gd" type="Script" id=3]
+[ext_resource path="res://gui/tools/Tools.tscn" type="PackedScene" id=4]
+[ext_resource path="res://gui/tools/CreatePlanetTool.tscn" type="PackedScene" id=5]
+[ext_resource path="res://gui/GUI.tscn" type="PackedScene" id=6]
 
 [node name="Main" type="Node"]
 
@@ -18,7 +17,6 @@ script = ExtResource( 1 )
 
 [node name="Universe" type="Node2D" parent="."]
 script = ExtResource( 2 )
-Planet = ExtResource( 3 )
 
 [node name="Area2D" type="Area2D" parent="Universe"]
 
@@ -31,16 +29,17 @@ disabled = true
 [node name="PlanetLabel" type="Label" parent="."]
 margin_right = 40.0
 margin_bottom = 14.0
-script = ExtResource( 4 )
+script = ExtResource( 3 )
 
-[node name="Tools" parent="." instance=ExtResource( 5 )]
+[node name="Tools" parent="." instance=ExtResource( 4 )]
 
-[node name="CreatePlanetTool" parent="." instance=ExtResource( 6 )]
+[node name="CreatePlanetTool" parent="." instance=ExtResource( 5 )]
 
 [node name="GUILayer" type="CanvasLayer" parent="."]
 
-[node name="GUI" parent="GUILayer" instance=ExtResource( 7 )]
+[node name="GUI" parent="GUILayer" instance=ExtResource( 6 )]
 [connection signal="body_exited" from="Universe/Area2D" to="Universe" method="_on_Area2D_body_exited"]
+[connection signal="mass_entered" from="GUILayer/GUI/PlanetCreatorPanel/HBoxContainer/VBoxContainer/MassLineEdit" to="CreatePlanetTool" method="_on_MassLineEdit_mass_entered"]
 [connection signal="pressed" from="GUILayer/GUI/HBoxContainer/toolButtons/createPlanet" to="Tools" method="_on_createPlanet_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/HBoxContainer/toolButtons/freeCursor" to="Tools" method="_on_freeCursor_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/HBoxContainer/toolButtons/applyForce" to="Tools" method="_on_applyForce_pressed"]
@@ -48,3 +47,5 @@ script = ExtResource( 4 )
 [connection signal="pressed" from="GUILayer/GUI/HBoxContainer/toolButtons/followPlanet" to="Tools" method="_on_followPlanet_pressed"]
 
 [editable path="GUILayer/GUI"]
+
+[editable path="GUILayer/GUI/PlanetCreatorPanel"]

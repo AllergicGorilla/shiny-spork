@@ -1,14 +1,9 @@
 extends Node2D
 
-export (PackedScene) var Planet
-
 var VIEWPHYSICS: bool = true
-var prevMousePos = Vector2()
-onready var tools = get_node("/root/Main/Tools")
 onready var createPlanetTool = get_node("/root/Main/CreatePlanetTool")
 
 func _ready():
-	add_child(createPlanetTool)
 	createPlanetTool.connect("planet_created", self, "_on_planet_created")
 
 func _physics_process(delta):

@@ -7,17 +7,17 @@ var newPlanetColor = Color(255,0,0)
 var newMass = 1.0
 var newRadius = 10.0
 
-func create_planet(pos, vel, newRadius = 10.0, mass= newMass, color = newPlanetColor):
+func create_planet(pos, vel, radius = newRadius, mass= newMass, color = newPlanetColor):
 	var planet = Planet.instance()
 	var body = planet.get_node("Body")
 	body.mass = mass
 	body.color = color
 	body.position = pos
 	body.linear_velocity = vel
-	body.radius = newRadius
+	body.radius = radius
 	emit_signal("planet_created", planet)
 
-func _on_mass_entered(mass):
-	newMass = mass
 func _on_color_entered(color):
 	newPlanetColor = color
+func _on_MassLineEdit_mass_entered(mass):
+	newMass = mass

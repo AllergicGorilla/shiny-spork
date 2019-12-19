@@ -42,22 +42,20 @@ func handle_input(event):
 			set_velocity_point(get_global_mouse_position())
 			next_state()
 			$VelocityArrow.show()
-			print(get_viewport().canvas_transform)
 	elif event.is_action_released("leftMouseClick"):
 		if state == STATE.dragging:
 			$VelocityArrow.hide()
 			set_velocity_point(get_global_mouse_position())
-			print(center)
-			print(get_global_mouse_position())
-			print(event.position)
-			print(get_viewport().get_mouse_position())
 			createPlanetTool.create_planet(tools.gui_to_world_pos(center), get_velocity())
 			next_state()
 	elif event is InputEventMouseMotion:
 		if state == STATE.dragging:
 			set_velocity_point(get_global_mouse_position())
 
-#func _draw():
-	#var points_circle = GeometryMath.generate_circle(32, center, get_radius())
-	#if state == STATE.setRadius or state == STATE.setVelocity:
-	#	draw_polyline(points_circle, Color(255,0,0))
+func _draw():
+	var color = createPlanetTool.newPlanetColor
+	var points_circle = GeometryMath.generate_circle(32, center, createPlanetTool.newRadius)
+	if state == STATE.dragging:
+		draw_polyline(points_circle, color)
+func _process(delta):
+	update()

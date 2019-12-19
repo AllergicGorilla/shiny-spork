@@ -1,10 +1,6 @@
 extends LineEdit
-onready var createPlanetTool = get_node("/root/Main/CreatePlanetTool")
 
 signal mass_entered
-
-func _ready():
-	connect("mass_entered", createPlanetTool, "_on_mass_entered")
 
 func _on_MassLineEdit_text_changed(new_text):
 	if new_text.is_valid_float():

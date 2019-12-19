@@ -6,7 +6,7 @@ export var color = Color(255,0,0)
 
 onready var VelocityVector = get_node("../VelocityVector")
 onready var ForceVector = get_node("../ForceVector")
-onready var tools = get_node("/root/Tools")
+onready var tools = get_node("/root/Main/Tools")
 
 signal body_selected
 
