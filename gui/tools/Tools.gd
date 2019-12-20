@@ -1,7 +1,6 @@
 extends Node
 enum TOOL{createPlanet, freeCursor, applyForce, peekPhysics}
 
-
 var currentState = TOOL.freeCursor setget set_current_state
 
 var currentPlanet setget set_currentPlanet
