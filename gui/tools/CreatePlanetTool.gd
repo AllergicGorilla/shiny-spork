@@ -18,7 +18,7 @@ func create_planet(pos, vel, radius, mass, color):
 	emit_signal("planet_created", planet)
 
 func gui_to_world_pos(pos):
-	return pos - get_viewport().canvas_transform.get_origin()
+	return get_viewport().canvas_transform.affine_inverse().xform(pos)
 
 func _on_color_entered(color):
 	newPlanetColor = color
@@ -27,4 +27,5 @@ func _on_mass_entered(mass):
 func _on_radius_entered(radius):
 	newRadius = radius
 func _on_new_planet_requested(guiPos, vel, radius = newRadius, mass = newMass, color = newPlanetColor):
-	create_planet(gui_to_world_pos(guiPos),vel,radius, mass, color)
+	var transform = get_viewport().canvas_transform.affine_inverse()
+	create_planet(gui_to_world_pos(guiPos),transform.basis_xform(vel),radius*transform.get_scale().x, mass, color)

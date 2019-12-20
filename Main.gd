@@ -14,7 +14,7 @@ func _unhandled_input(event):
 		if tools.mode == tools.PLANET_CREATION_MODE.clickAndDrag:
 			clickAndDragPlanetCreator.handle_input(event)
 		elif tools.mode == tools.PLANET_CREATION_MODE.threeSteps:
-			threeStepsPlanetCreator.handle_input(event, tools)
+			threeStepsPlanetCreator.handle_input(event)
 
 #SIGNAL HANDLING
 func _on_planet_created(newPlanet):
@@ -25,8 +25,10 @@ func _on_planet_selected(planet):
 	tools.currentPlanet = planet
 func _on_ClickAndDrag_pressed():
 	tools.mode = tools.PLANET_CREATION_MODE.clickAndDrag
+	threeStepsPlanetCreator.initialize()
 func _on_ThreeSteps_pressed():
 	tools.mode = tools.PLANET_CREATION_MODE.threeSteps
+	clickAndDragPlanetCreator.initialize()
 func _on_peekPhysics_pressed():
 	Globals.VIEWPHYSICS = !Globals.VIEWPHYSICS
 	print(Globals.VIEWPHYSICS)

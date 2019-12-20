@@ -17,10 +17,6 @@ var velocityOffset: Vector2 = Vector2(0,20)
 #Position, velocity and radius
 #Each of them can be set within an editable preview of the planet
 
-
-func _unhandled_input(event):
-	handle_input(event)
-
 func next_state():
 	state = (state + 1) % STATE.size()
 	match state:
@@ -53,9 +49,16 @@ func handle_input(event):
 			next_state()
 	if event.is_action_released("leftMouseClick"):
 		CenterHandle.dragMouse = false
-	if event.is_action_pressed("ui_accept"):
+	if event.is_action_pressed("confirm"):
 		emit_signal("new_planet_requested", CenterHandle.position, get_velocity(), get_radius())
 		next_state()
+func initialize():
+	state = STATE.initial
+	match state:
+		STATE.initial:
+			hide()
+		STATE.editing:
+			show()
 
 func _draw():
 	var points_circle = GeometryMath.generate_circle(32, CenterHandle.position, get_radius())

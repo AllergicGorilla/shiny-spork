@@ -14,9 +14,9 @@ func next_state():
 	state = (state + 1) % STATE.size()
 	match state:
 		STATE.free:
-			$VelocityArrow.hide()
+			hide()
 		STATE.dragging:
-			$VelocityArrow.show()
+			show()
 	
 
 func set_center(newCenter: Vector2):
@@ -35,7 +35,7 @@ func handle_input(event):
 			set_center(get_global_mouse_position())
 			set_velocity_point(get_global_mouse_position())
 			next_state()
-			$VelocityArrow.show()
+			show()
 	elif event.is_action_released("leftMouseClick"):
 		if state == STATE.dragging:
 			$VelocityArrow.hide()
@@ -45,6 +45,14 @@ func handle_input(event):
 	elif event is InputEventMouseMotion:
 		if state == STATE.dragging:
 			set_velocity_point(get_global_mouse_position())
+
+func initialize():
+	state = STATE.free
+	match state:
+		STATE.free:
+			hide()
+		STATE.dragging:
+			show()
 
 func _draw():
 	var color = createPlanetTool.newPlanetColor
