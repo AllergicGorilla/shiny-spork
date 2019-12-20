@@ -43,7 +43,7 @@ disabled = true
 [connection signal="pressed" from="GUILayer/GUI/HBoxContainer/toolButtons/createPlanet" to="Tools" method="_on_createPlanet_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/HBoxContainer/toolButtons/freeCursor" to="Tools" method="_on_freeCursor_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/HBoxContainer/toolButtons/applyForce" to="Tools" method="_on_applyForce_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/HBoxContainer/toolButtons/peekPhysics" to="Universe" method="_on_peekPhysics_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/HBoxContainer/toolButtons/peekPhysics" to="." method="_on_peekPhysics_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/HBoxContainer/toolButtons/followPlanet" to="Tools" method="_on_followPlanet_pressed"]
 [connection signal="new_planet_requested" from="GUILayer/GUI/ClickAndDragPlanetCreator" to="CreatePlanetTool" method="_on_new_planet_requested"]
 [connection signal="new_planet_requested" from="GUILayer/GUI/ThreeStepsPlanetCreator" to="CreatePlanetTool" method="_on_new_planet_requested"]

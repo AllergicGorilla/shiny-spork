@@ -27,3 +27,10 @@ func _on_ClickAndDrag_pressed():
 	tools.mode = tools.PLANET_CREATION_MODE.clickAndDrag
 func _on_ThreeSteps_pressed():
 	tools.mode = tools.PLANET_CREATION_MODE.threeSteps
+func _on_peekPhysics_pressed():
+	Globals.VIEWPHYSICS = !Globals.VIEWPHYSICS
+	print(Globals.VIEWPHYSICS)
+	if Globals.VIEWPHYSICS:
+		get_tree().call_group("planets", "show_physics")
+	else:
+		get_tree().call_group("planets", "hide_physics")
