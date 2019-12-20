@@ -2,74 +2,70 @@ extends Node2D
 
 signal new_planet_requested
 
-enum STATE{initial, setRadius, setVelocity}
+enum STATE{initial, editing}
 
 var state = STATE.initial
-var center: Vector2 setget set_center
-var radiusPoint: Vector2 setget set_radius_point
-var velocityPoint: Vector2 setget set_velocity_point
-var newPlanetColor = Color(255,0,0)
-var newMass = 1.0
+
+onready var VelocityHandle = $VelocityHandle
+onready var RadiusHandle = $RadiusHandle
+onready var CenterHandle = $CenterHandle
+
+var radiusOffset: Vector2 = Vector2(20,0)
+var velocityOffset: Vector2 = Vector2(0,20)
+
+#This is a tool to create a planet giving three initial conditions:
+#Position, velocity and radius
+#Each of them can be set within an editable preview of the planet
+
+
+func _unhandled_input(event):
+	handle_input(event)
 
 func next_state():
 	state = (state + 1) % STATE.size()
 	match state:
 		STATE.initial:
-			$VelocityArrow.hide()
-			$RadiusArrow.hide()
-		STATE.setRadius:
-			$RadiusArrow.show()
-		STATE.setVelocity:
-			$VelocityArrow.show()
+			hide()
+		STATE.editing:
+			show()
 	
 
-func set_center(newCenter: Vector2):
-	center = newCenter
-	$RadiusArrow.origin = center
-	$VelocityArrow.origin = center
+func set_center(center: Vector2):
+	RadiusHandle.origin = center
+	VelocityHandle.origin = center
+	CenterHandle.position = center
 func set_radius_point(newRadiusPoint: Vector2):
-	radiusPoint = newRadiusPoint
-	$RadiusArrow.tip = radiusPoint
+	RadiusHandle.tip = newRadiusPoint
 func set_velocity_point(newVelocityPoint: Vector2):
-	velocityPoint = newVelocityPoint
-	$VelocityArrow.tip = velocityPoint
+	VelocityHandle.tip = newVelocityPoint
 func get_velocity():
-	return $VelocityArrow.tip - center
+	return VelocityHandle.tip - CenterHandle.position
 func get_radius():
-	return (radiusPoint - center).length()
+	return (RadiusHandle.tip - CenterHandle.position).length()
 	
 	
-func handle_input(event, tools):
-	#This is game logic to display arrows (representing either the starting radius or velocity)
-	#whenever the player clicks and moves their mouse
-	#during the creation of a new Planet
-	#First click: sets the initial position
-	#Second click: sets the radius
-	#Third click: sets the velocity
+func handle_input(event):
 	if event.is_action_pressed("leftMouseClick"):
-		match state:
-			STATE.initial:
-				set_center(get_global_mouse_position())
-				set_radius_point(get_global_mouse_position())
-				next_state()
-			STATE.setRadius:
-				set_radius_point(get_global_mouse_position())
-				set_velocity_point(get_global_mouse_position())
-				next_state()
-			STATE.setVelocity:
-				set_velocity_point(get_global_mouse_position())
-				emit_signal("new_planet_requested", center, get_velocity(), get_radius())
-				next_state()
-	elif event is InputEventMouseMotion:
-		match state:
-			STATE.setRadius:
-				set_radius_point(get_global_mouse_position())
-			STATE.setVelocity:
-				set_velocity_point(get_global_mouse_position())
+		if state == STATE.initial:
+			set_center(get_global_mouse_position())
+			set_radius_point(get_global_mouse_position() + radiusOffset)
+			set_velocity_point(get_global_mouse_position() + velocityOffset)
+			next_state()
+	if event.is_action_released("leftMouseClick"):
+		CenterHandle.dragMouse = false
+	if event.is_action_pressed("ui_accept"):
+		emit_signal("new_planet_requested", CenterHandle.position, get_velocity(), get_radius())
+		next_state()
 
 func _draw():
-	var points_circle = GeometryMath.generate_circle(32, center, get_radius())
-	if state == STATE.setRadius or state == STATE.setVelocity:
+	var points_circle = GeometryMath.generate_circle(32, CenterHandle.position, get_radius())
+	if state == STATE.editing:
 		draw_polyline(points_circle, Color(255,0,0))
 func _process(delta):
 	update()
+	if CenterHandle.dragMouse:
+		var mousePos = get_global_mouse_position()
+		set_center(mousePos)
+func _on_Area2D_input_event(viewport, event, shape_idx):
+	if event.is_action_pressed("leftMouseClick") and STATE.editing:
+		CenterHandle.dragMouse = true

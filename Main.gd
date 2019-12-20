@@ -12,7 +12,7 @@ func _ready():
 func _unhandled_input(event):
 	if tools.current == tools.TOOL.createPlanet:
 		if tools.mode == tools.PLANET_CREATION_MODE.clickAndDrag:
-			clickAndDragPlanetCreator.handle_input(event, tools)
+			clickAndDragPlanetCreator.handle_input(event)
 		elif tools.mode == tools.PLANET_CREATION_MODE.threeSteps:
 			threeStepsPlanetCreator.handle_input(event, tools)
 

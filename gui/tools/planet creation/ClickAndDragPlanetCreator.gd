@@ -29,7 +29,7 @@ func get_velocity():
 	return $VelocityArrow.tip - center
 	
 	
-func handle_input(event, tools):
+func handle_input(event):
 	if event.is_action_pressed("leftMouseClick"):
 		if state == STATE.free:
 			set_center(get_global_mouse_position())

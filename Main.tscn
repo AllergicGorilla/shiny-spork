@@ -32,6 +32,7 @@ disabled = true
 [node name="CreatePlanetTool" parent="." instance=ExtResource( 5 )]
 
 [node name="GUILayer" type="CanvasLayer" parent="."]
+editor/display_folded = true
 
 [node name="GUI" parent="GUILayer" instance=ExtResource( 6 )]
 [connection signal="body_exited" from="Universe/Area2D" to="Universe" method="_on_Area2D_body_exited"]
