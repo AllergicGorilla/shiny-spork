@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://gui/tools/planet creation/panel/PlanetCreatorPanel.tscn" type="PackedScene" id=1]
-[ext_resource path="res://gui/tools/planet creation/ClickAndDragPlanetCreator.tscn" type="PackedScene" id=2]
-[ext_resource path="res://gui/tools/planet creation/ThreeStepsPlanetCreator.tscn" type="PackedScene" id=3]
+[ext_resource path="res://gui/tools/Tools.tscn" type="PackedScene" id=2]
+[ext_resource path="res://gui/tools/CreatePlanetTool.tscn" type="PackedScene" id=3]
+[ext_resource path="res://gui/tools/planet creation/ThreeStepsPlanetCreator.tscn" type="PackedScene" id=4]
+[ext_resource path="res://gui/tools/planet creation/ClickAndDragPlanetCreator.tscn" type="PackedScene" id=5]
 
 [node name="GUI" type="Control"]
 anchor_right = 1.0
@@ -60,6 +62,24 @@ margin_right = 479.0
 margin_bottom = 20.0
 text = "Follow Planet"
 
-[node name="ClickAndDragPlanetCreator" parent="." instance=ExtResource( 2 )]
+[node name="Tools" parent="." instance=ExtResource( 2 )]
 
-[node name="ThreeStepsPlanetCreator" parent="." instance=ExtResource( 3 )]
+[node name="CreatePlanetTool" parent="Tools" instance=ExtResource( 3 )]
+
+[node name="ThreeStepsPlanetCreator" parent="Tools/CreatePlanetTool" instance=ExtResource( 4 )]
+
+[node name="ClickAndDragPlanetCreator" parent="Tools/CreatePlanetTool" instance=ExtResource( 5 )]
+[connection signal="mass_entered" from="PlanetCreatorPanel/HBoxContainer/VBoxContainer/MassEditor" to="Tools/CreatePlanetTool" method="_on_mass_entered"]
+[connection signal="radius_entered" from="PlanetCreatorPanel/HBoxContainer/VBoxContainer/RadiusEditor" to="Tools/CreatePlanetTool" method="_on_radius_entered"]
+[connection signal="color_changed" from="PlanetCreatorPanel/HBoxContainer/PlanetColorPicker/ColorPicker" to="Tools/CreatePlanetTool" method="_on_color_changed"]
+[connection signal="pressed" from="PlanetCreatorPanel/HBoxContainer/VBoxContainer2/ClickAndDrag" to="Tools/CreatePlanetTool" method="_on_ClickAndDrag_pressed"]
+[connection signal="pressed" from="PlanetCreatorPanel/HBoxContainer/VBoxContainer2/ThreeSteps" to="Tools/CreatePlanetTool" method="_on_ThreeSteps_pressed"]
+[connection signal="pressed" from="HBoxContainer/toolButtons/createPlanet" to="Tools" method="_on_createPlanet_pressed"]
+[connection signal="pressed" from="HBoxContainer/toolButtons/freeCursor" to="Tools" method="_on_freeCursor_pressed"]
+[connection signal="pressed" from="HBoxContainer/toolButtons/applyForce" to="Tools" method="_on_applyForce_pressed"]
+[connection signal="pressed" from="HBoxContainer/toolButtons/peekPhysics" to="Tools" method="_on_peekPhysics_pressed"]
+[connection signal="pressed" from="HBoxContainer/toolButtons/followPlanet" to="Tools" method="_on_followPlanet_pressed"]
+[connection signal="new_planet_requested" from="Tools/CreatePlanetTool/ThreeStepsPlanetCreator" to="Tools/CreatePlanetTool" method="_on_new_planet_requested"]
+[connection signal="new_planet_requested" from="Tools/CreatePlanetTool/ClickAndDragPlanetCreator" to="Tools/CreatePlanetTool" method="_on_new_planet_requested"]
+
+[editable path="PlanetCreatorPanel"]

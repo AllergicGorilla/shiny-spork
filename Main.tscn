@@ -1,11 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://gui/Camera2D.gd" type="Script" id=2]
 [ext_resource path="res://Universe.gd" type="Script" id=3]
-[ext_resource path="res://gui/tools/Tools.tscn" type="PackedScene" id=4]
-[ext_resource path="res://gui/tools/CreatePlanetTool.tscn" type="PackedScene" id=5]
-[ext_resource path="res://gui/GUI.tscn" type="PackedScene" id=6]
+[ext_resource path="res://gui/GUI.tscn" type="PackedScene" id=4]
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
@@ -27,26 +25,15 @@ position = Vector2( 0, 1 )
 polygon = PoolVector2Array( -10, -11, 1930, -11, 1930, 1089, -10, 1089 )
 disabled = true
 
-[node name="Tools" parent="." instance=ExtResource( 4 )]
-
-[node name="CreatePlanetTool" parent="." instance=ExtResource( 5 )]
-
 [node name="GUILayer" type="CanvasLayer" parent="."]
 
-[node name="GUI" parent="GUILayer" instance=ExtResource( 6 )]
+[node name="GUI" parent="GUILayer" instance=ExtResource( 4 )]
 [connection signal="body_exited" from="Universe/Area2D" to="Universe" method="_on_Area2D_body_exited"]
-[connection signal="mass_entered" from="GUILayer/GUI/PlanetCreatorPanel/HBoxContainer/VBoxContainer/MassEditor" to="CreatePlanetTool" method="_on_mass_entered"]
-[connection signal="radius_entered" from="GUILayer/GUI/PlanetCreatorPanel/HBoxContainer/VBoxContainer/RadiusEditor" to="CreatePlanetTool" method="_on_radius_entered"]
-[connection signal="color_changed" from="GUILayer/GUI/PlanetCreatorPanel/HBoxContainer/PlanetColorPicker/ColorPicker" to="CreatePlanetTool" method="_on_color_entered"]
-[connection signal="pressed" from="GUILayer/GUI/PlanetCreatorPanel/HBoxContainer/VBoxContainer2/ClickAndDrag" to="." method="_on_ClickAndDrag_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/PlanetCreatorPanel/HBoxContainer/VBoxContainer2/ThreeSteps" to="." method="_on_ThreeSteps_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/HBoxContainer/toolButtons/createPlanet" to="Tools" method="_on_createPlanet_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/HBoxContainer/toolButtons/freeCursor" to="Tools" method="_on_freeCursor_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/HBoxContainer/toolButtons/applyForce" to="Tools" method="_on_applyForce_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/HBoxContainer/toolButtons/peekPhysics" to="." method="_on_peekPhysics_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/HBoxContainer/toolButtons/followPlanet" to="Tools" method="_on_followPlanet_pressed"]
-[connection signal="new_planet_requested" from="GUILayer/GUI/ClickAndDragPlanetCreator" to="CreatePlanetTool" method="_on_new_planet_requested"]
-[connection signal="new_planet_requested" from="GUILayer/GUI/ThreeStepsPlanetCreator" to="CreatePlanetTool" method="_on_new_planet_requested"]
+[connection signal="mass_entered" from="GUILayer/GUI/PlanetCreatorPanel/HBoxContainer/VBoxContainer/MassEditor" to="GUILayer/GUI/Tools/CreatePlanetTool" method="_on_mass_entered"]
+[connection signal="radius_entered" from="GUILayer/GUI/PlanetCreatorPanel/HBoxContainer/VBoxContainer/RadiusEditor" to="GUILayer/GUI/Tools/CreatePlanetTool" method="_on_radius_entered"]
+[connection signal="color_changed" from="GUILayer/GUI/PlanetCreatorPanel/HBoxContainer/PlanetColorPicker/ColorPicker" to="GUILayer/GUI/Tools/CreatePlanetTool" method="_on_color_changed"]
+[connection signal="pressed" from="GUILayer/GUI/PlanetCreatorPanel/HBoxContainer/VBoxContainer2/ClickAndDrag" to="GUILayer/GUI/Tools/CreatePlanetTool" method="_on_ClickAndDrag_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/PlanetCreatorPanel/HBoxContainer/VBoxContainer2/ThreeSteps" to="GUILayer/GUI/Tools/CreatePlanetTool" method="_on_ThreeSteps_pressed"]
 
 [editable path="GUILayer/GUI"]
 

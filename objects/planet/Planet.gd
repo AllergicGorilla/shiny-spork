@@ -22,7 +22,7 @@ func update_text():
 func _on_Body_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("leftMouseClick"):
 		emit_signal("planet_selected", self)
-		print("planet selected")
+		Helpers.debug_print("planet selected")
 
 func hide_physics():
 	$Following.hide()

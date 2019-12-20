@@ -50,8 +50,11 @@ func handle_input(event):
 	if event.is_action_released("leftMouseClick"):
 		CenterHandle.dragMouse = false
 	if event.is_action_pressed("confirm"):
-		emit_signal("new_planet_requested", CenterHandle.position, get_velocity(), get_radius())
-		next_state()
+		if state == STATE.editing:
+			var canvasTransform = get_viewport().canvas_transform.affine_inverse()
+			emit_signal("new_planet_requested", canvasTransform.xform(CenterHandle.position),
+				canvasTransform.basis_xform(get_velocity()), canvasTransform.get_scale().x*get_radius())
+			next_state()
 func initialize():
 	state = STATE.initial
 	match state:

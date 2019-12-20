@@ -8,7 +8,7 @@ var state = STATE.free
 var center: Vector2 setget set_center
 var velocityPoint: Vector2 setget set_velocity_point
 
-onready var createPlanetTool = get_node("/root/Main/CreatePlanetTool")
+onready var createPlanetTool = get_parent()
 
 func next_state():
 	state = (state + 1) % STATE.size()
@@ -38,9 +38,10 @@ func handle_input(event):
 			show()
 	elif event.is_action_released("leftMouseClick"):
 		if state == STATE.dragging:
-			$VelocityArrow.hide()
 			set_velocity_point(get_global_mouse_position())
-			emit_signal("new_planet_requested", center, get_velocity())
+			var canvasTransform = get_viewport().canvas_transform.affine_inverse()
+			emit_signal("new_planet_requested", canvasTransform.xform(center),
+				canvasTransform.basis_xform(get_velocity()), canvasTransform.get_scale().x*createPlanetTool.newRadius)
 			next_state()
 	elif event is InputEventMouseMotion:
 		if state == STATE.dragging:

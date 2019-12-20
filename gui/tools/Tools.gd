@@ -1,10 +1,10 @@
 extends Node
 enum TOOL{createPlanet, freeCursor, applyForce, peekPhysics}
-enum PLANET_CREATION_MODE{clickAndDrag, threeSteps}
 
-var current = TOOL.freeCursor
-var mode = PLANET_CREATION_MODE.clickAndDrag
-var currentPlanet setget currentPlanet_set
+
+var currentState = TOOL.freeCursor setget set_current_state
+
+var currentPlanet setget set_currentPlanet
 var followPlanet = false
 
 signal currentPlanet_changed
@@ -12,7 +12,10 @@ signal currentPlanet_changed
 func gui_to_world_pos(pos):
 	return pos - get_viewport().canvas_transform.get_origin()
 
-func currentPlanet_set(new):
+func set_current_state(newState):
+	currentState = newState
+
+func set_currentPlanet(new):
 	new.connect("tree_exited", self, "_on_currentPlanetBody_tree_exited")
 	currentPlanet = new
 	if followPlanet:
@@ -20,18 +23,24 @@ func currentPlanet_set(new):
 	emit_signal("currentPlanet_changed", currentPlanet)
 func follow_current_planet():
 	if is_instance_valid(currentPlanet):
-		currentPlanet.get_node("Body/Camera").current = true	
+		currentPlanet.get_node("Body/Camera").currentState = true	
 
 func _on_currentPlanetBody_tree_exited():
 	currentPlanet = null
 	emit_signal("currentPlanet_changed")
 
 func _on_createPlanet_pressed():
-	current = TOOL.createPlanet
+	currentState = TOOL.createPlanet
 func _on_freeCursor_pressed():
-	current = TOOL.freeCursor
+	currentState = TOOL.freeCursor
 func _on_applyForce_pressed():
-	current = TOOL.applyForce
+	currentState = TOOL.applyForce
 func _on_followPlanet_pressed():
 	followPlanet = !followPlanet
-
+func _on_peekPhysics_pressed():
+	Globals.VIEWPHYSICS = !Globals.VIEWPHYSICS
+	Helpers.debug_print(Globals.VIEWPHYSICS)
+	if Globals.VIEWPHYSICS:
+		get_tree().call_group("planets", "show_physics")
+	else:
+		get_tree().call_group("planets", "hide_physics")
