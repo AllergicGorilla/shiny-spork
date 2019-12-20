@@ -23,7 +23,7 @@ func set_currentPlanet(new):
 	emit_signal("currentPlanet_changed", currentPlanet)
 func follow_current_planet():
 	if is_instance_valid(currentPlanet):
-		currentPlanet.get_node("Body/Camera").currentState = true	
+		currentPlanet.get_node("Body/Camera").current = true	
 
 func _on_currentPlanetBody_tree_exited():
 	currentPlanet = null
