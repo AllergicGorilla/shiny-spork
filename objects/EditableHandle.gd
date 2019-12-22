@@ -23,8 +23,10 @@ func _draw():
 func _process(delta):
 	update()
 	if dragMouse:
-		tip = get_global_mouse_position()
+		tip = get_global_mouse_position() - get_parent().position
 		$Area2D.position = tip
+func as_vector():
+	return tip - position
 
 func _unhandled_input(event):
 	if event.is_action_released("leftMouseClick"):

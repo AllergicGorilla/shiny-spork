@@ -3,7 +3,13 @@ extends Node
 signal planet_selected
 
 var mainText = "Speed: %.2f, Force: %.2f"
+
+export var mass: float = 1.0 setget set_mass
+export var radius: float = 1.0
+export var color: Color = Color.white
+var gravityForce = Vector2(0,0)
 onready var label = $Following/Label
+onready var body = $Body
 
 func _ready():
 	if Globals.VIEWPHYSICS:
@@ -16,7 +22,7 @@ func _process(delta):
 
 func update_text():
 	var v = get_node("Body").linear_velocity.length()
-	var f = get_node("Body").gravityForce.length()
+	var f = gravityForce.length()
 	label.text = mainText % [v,f]
 
 func _on_Body_input_event(viewport, event, shape_idx):
@@ -28,3 +34,8 @@ func hide_physics():
 	$Following.hide()
 func show_physics():
 	$Following.show()
+
+func set_mass(new_mass):
+	mass = new_mass
+	if is_instance_valid(body):
+		body.mass = new_mass
