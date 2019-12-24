@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Play.gd" type="Script" id=1]
 [ext_resource path="res://Universe.gd" type="Script" id=2]
 [ext_resource path="res://objects/ship/player/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://objects/planet/Planet.tscn" type="PackedScene" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+resource_local_to_scene = true
 
 [node name="Play" type="Node"]
 script = ExtResource( 1 )
@@ -21,9 +24,19 @@ max_acceleration = 400.0
 [node name="Planet" parent="Universe" groups=[
 "planets",
 ] instance=ExtResource( 4 )]
-position = Vector2( 534.037, 492.432 )
 mass = 100.0
 radius = 500.0
 color = Color( 0.384314, 1, 0, 1 )
 
+[node name="Body" parent="Universe/Planet" index="0"]
+position = Vector2( 197.376, 0.984146 )
+
+[node name="collisionShape" parent="Universe/Planet/Body" index="0"]
+shape = SubResource( 1 )
+
+[node name="Following" parent="Universe/Planet" index="1"]
+position = Vector2( 197.376, 0.984146 )
+
 [editable path="Universe/Player"]
+
+[editable path="Universe/Planet"]

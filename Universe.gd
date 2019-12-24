@@ -10,7 +10,7 @@ func _physics_process(delta):
 			if p1 != p2:
 				var distanceVec = p1.get_position() - p2.get_position()
 				gravForce += Newton.gravitational_force(p1.mass, p2.mass, distanceVec)
-		p1.gravityForce = gravForce
+		p1.gravity_force = gravForce
 	for s in ships:
 		var final_force = Vector2(0,0)
 		for p1 in planets:

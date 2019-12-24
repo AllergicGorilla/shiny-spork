@@ -1,3 +1,3 @@
 extends Node
 
-var VIEWPHYSICS: bool = true
+var VIEWPHYSICS: bool = false

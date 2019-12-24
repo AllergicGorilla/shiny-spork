@@ -59,3 +59,4 @@ margin_bottom = 89.0
 custom_fonts/font = SubResource( 1 )
 text = "Planets 'n Stuff"
 [connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="VBoxContainer/Editor" to="." method="_on_Editor_pressed"]

@@ -1,39 +1,29 @@
-extends Node
-signal planet_created
+extends Control
+const PlanetCreator = preload("res://gui/tools/planet creation/PlanetCreator.gd")
+onready var planet_creator = $ClickAndDragCreator
 
-enum PLANET_CREATION_MODE{clickAndDrag, threeSteps}
 
-onready var Planet = preload("res://objects/planet/Planet.tscn")
+func handle_input(event):
+	planet_creator.handle_input(event)
 
-var mode = PLANET_CREATION_MODE.clickAndDrag
-var newPlanetColor = Color(255,0,0)
-var newMass = 1.0
-var newRadius = 10.0
 
-func create_planet(pos, vel, radius, mass, color):
-	var planet = Planet.instance()
-	var body = planet.get_node("Body")
-	body.mass = mass
-	body.color = color
-	body.position = pos
-	body.linear_velocity = vel
-	body.radius = radius
-	emit_signal("planet_created", planet)
+func _on_MassEditor_mass_entered(mass):
+	planet_creator.planet_mass = mass
 
-func gui_to_world_pos(pos):
-	return get_viewport().canvas_transform.affine_inverse().xform(pos)
 
-func _on_color_changed(color):
-	newPlanetColor = color
-func _on_mass_entered(mass):
-	newMass = mass
-func _on_radius_entered(radius):
-	newRadius = radius
-func _on_new_planet_requested(pos, vel, radius = newRadius, mass = newMass, color = newPlanetColor):
-	create_planet(pos,vel,radius, mass, color)
+func _on_RadiusEditor_radius_entered(radius):
+	planet_creator.planet_radius = radius
+
+
+func _on_ColorPicker_color_changed(color):
+	planet_creator.planet_color = color
+
+
 func _on_ClickAndDrag_pressed():
-	mode = PLANET_CREATION_MODE.clickAndDrag
-	$ThreeStepsPlanetCreator.initialize()
+	planet_creator.reset()
+	planet_creator = $ClickAndDragCreator
+
+
 func _on_ThreeSteps_pressed():
-	mode = PLANET_CREATION_MODE.threeSteps
-	$ClickAndDragPlanetCreator.initialize()
+	planet_creator.reset()
+	planet_creator = $ThreeStepsCreator

@@ -1,45 +1,54 @@
-extends Node
-enum TOOL{createPlanet, freeCursor, applyForce, peekPhysics}
+extends Control
 
-var currentState = TOOL.freeCursor setget set_current_state
+var peek_physics = true
+var current_planet setget set_current_planet
+var follow_planet = false
+const Tool = preload("res://gui/tools/Tool.gd")
+var current_tool: Tool
 
-var currentPlanet setget set_currentPlanet
-var followPlanet = false
+signal current_planet_changed
 
-signal currentPlanet_changed
 
-func gui_to_world_pos(pos):
-	return pos - get_viewport().canvas_transform.get_origin()
+func _ready():
+	current_tool = $CreatePlanet
 
-func set_current_state(newState):
-	currentState = newState
 
-func set_currentPlanet(new):
-	new.connect("tree_exited", self, "_on_currentPlanetBody_tree_exited")
-	currentPlanet = new
-	if followPlanet:
+func _unhandled_input(event):
+	if is_instance_valid(current_tool):
+		current_tool.handle_input(event)
+
+
+func set_current_planet(new):
+	new.connect("tree_exited", self, "_on_current_planet_tree_exited")
+	current_planet = new
+	if follow_planet:
 		follow_current_planet()
-	emit_signal("currentPlanet_changed", currentPlanet)
-func follow_current_planet():
-	if is_instance_valid(currentPlanet):
-		currentPlanet.get_node("Body/Camera").current = true	
+	emit_signal("current_planet_changed", current_planet)
 
-func _on_currentPlanetBody_tree_exited():
-	currentPlanet = null
-	emit_signal("currentPlanet_changed")
+
+func follow_current_planet():
+	if is_instance_valid(current_planet):
+		current_planet.get_node("Camera").current = true
+
+
+func _on_current_planet_tree_exited():
+	current_planet = null
+	emit_signal("current_planet_changed")
+
+
+func _on_followPlanet_pressed():
+	follow_planet = !follow_planet
+
 
 func _on_createPlanet_pressed():
-	currentState = TOOL.createPlanet
-func _on_freeCursor_pressed():
-	currentState = TOOL.freeCursor
-func _on_applyForce_pressed():
-	currentState = TOOL.applyForce
-func _on_followPlanet_pressed():
-	followPlanet = !followPlanet
+	current_tool = $CreatePlanet
+
 func _on_peekPhysics_pressed():
 	Globals.VIEWPHYSICS = !Globals.VIEWPHYSICS
-	Helpers.debug_print(Globals.VIEWPHYSICS)
-	if Globals.VIEWPHYSICS:
-		get_tree().call_group("planets", "show_physics")
-	else:
-		get_tree().call_group("planets", "hide_physics")
+	var planets = get_tree().get_nodes_in_group("planets")
+	for p in planets:
+		if Globals.VIEWPHYSICS:
+			p.show_physics()
+		else:
+			p.hide_physics()
+

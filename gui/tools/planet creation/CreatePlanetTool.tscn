@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://gui/tools/CreatePlanetTool.gd" type="Script" id=1]
+[ext_resource path="res://gui/tools/planet creation/panel/PlanetCreatorPanel.tscn" type="PackedScene" id=2]
+[ext_resource path="res://gui/tools/planet creation/ClickAndDragPlanetCreator.tscn" type="PackedScene" id=3]
+[ext_resource path="res://gui/tools/planet creation/ThreeStepsPlanetCreator.tscn" type="PackedScene" id=4]
+
+[node name="CreatePlanetTool" type="Control"]
+mouse_filter = 1
+script = ExtResource( 1 )
+
+[node name="Panel" parent="." instance=ExtResource( 2 )]
+
+[node name="ClickAndDragCreator" parent="." instance=ExtResource( 3 )]
+
+[node name="ThreeStepsCreator" parent="." instance=ExtResource( 4 )]
+[connection signal="mass_entered" from="Panel/HBoxContainer/VBoxContainer/MassEditor" to="." method="_on_MassEditor_mass_entered"]
+[connection signal="radius_entered" from="Panel/HBoxContainer/VBoxContainer/RadiusEditor" to="." method="_on_RadiusEditor_radius_entered"]
+[connection signal="color_changed" from="Panel/HBoxContainer/PlanetColorPicker/ColorPicker" to="." method="_on_ColorPicker_color_changed"]
+[connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer2/ClickAndDrag" to="." method="_on_ClickAndDrag_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer2/ThreeSteps" to="." method="_on_ThreeSteps_pressed"]
+
+[editable path="Panel"]

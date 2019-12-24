@@ -1,6 +1,72 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://gui/tools/Tools.gd" type="Script" id=1]
+[ext_resource path="res://gui/tools/planet creation/CreatePlanetTool.tscn" type="PackedScene" id=2]
 
-[node name="Tools" type="Node"]
+[node name="Tools" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
 script = ExtResource( 1 )
+
+[node name="CreatePlanet" parent="." instance=ExtResource( 2 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Panel" parent="CreatePlanet" index="0"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -331.0
+margin_top = -102.0
+margin_right = 0.0
+margin_bottom = 0.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+margin_bottom = 20.0
+alignment = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="toolButtons" type="HBoxContainer" parent="HBoxContainer"]
+margin_left = 1441.0
+margin_right = 1920.0
+margin_bottom = 20.0
+
+[node name="createPlanet" type="Button" parent="HBoxContainer/toolButtons"]
+margin_right = 97.0
+margin_bottom = 20.0
+text = "Create planet"
+
+[node name="freeCursor" type="Button" parent="HBoxContainer/toolButtons"]
+margin_left = 101.0
+margin_right = 185.0
+margin_bottom = 20.0
+text = "Free cursor"
+
+[node name="applyForce" type="Button" parent="HBoxContainer/toolButtons"]
+margin_left = 189.0
+margin_right = 283.0
+margin_bottom = 20.0
+text = "Apply Forces"
+
+[node name="peekPhysics" type="Button" parent="HBoxContainer/toolButtons"]
+margin_left = 287.0
+margin_right = 378.0
+margin_bottom = 20.0
+text = "peekPhysics"
+
+[node name="followPlanet" type="Button" parent="HBoxContainer/toolButtons"]
+margin_left = 382.0
+margin_right = 479.0
+margin_bottom = 20.0
+text = "Follow Planet"
+[connection signal="pressed" from="HBoxContainer/toolButtons/createPlanet" to="." method="_on_createPlanet_pressed"]
+[connection signal="pressed" from="HBoxContainer/toolButtons/peekPhysics" to="." method="_on_peekPhysics_pressed"]
+[connection signal="pressed" from="HBoxContainer/toolButtons/followPlanet" to="." method="_on_followPlanet_pressed"]
+
+[editable path="CreatePlanet"]

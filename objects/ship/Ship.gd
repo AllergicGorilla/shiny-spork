@@ -33,7 +33,7 @@ func _draw():
 	draw_polyline(triangle, Color.red)
 func _process(delta):
 	#Resets calculated torques and forces back to zero
-	#If it's the player ship, you must do this after the input handling
+	#If it's the player ship(playable=true), you must do this after the input handling
 	if !playable:
 		set_thrust(0.0)
 		set_torque(0.0)

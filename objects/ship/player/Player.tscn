@@ -11,7 +11,7 @@ script = ExtResource( 1 )
 [node name="Ship" parent="." instance=ExtResource( 2 )]
 playable = true
 
-[node name="Camera2D" type="Camera2D" parent="Ship"]
+[node name="PlayerCamera" type="Camera2D" parent="Ship"]
 current = true
 drag_margin_h_enabled = false
 drag_margin_v_enabled = false
@@ -32,28 +32,17 @@ text = "Target"
 [node name="Following" type="Node2D" parent="."]
 
 [node name="TargetVelocity" parent="Following" instance=ExtResource( 3 )]
-origin = Vector2( 0, 0 )
-tip = Vector2( 1, 0 )
 color = Color( 255, 227.109, 0, 1 )
 
 [node name="VelocityArrow" parent="Following" instance=ExtResource( 4 )]
-origin = Vector2( 0, 0 )
-tip = Vector2( 1, 0 )
-color = Color( 0, 255, 0, 1 )
 
 [node name="TargetdV" parent="Following" instance=ExtResource( 4 )]
-origin = Vector2( 0, 0 )
-tip = Vector2( 1, 0 )
 color = Color( 223.125, 0, 255, 1 )
 
 [node name="ShootVelocity" parent="Following" instance=ExtResource( 4 )]
-origin = Vector2( 0, 0 )
-tip = Vector2( 1, 0 )
 color = Color( 0, 255, 225.117, 1 )
 
 [node name="ForceVector" parent="Following" instance=ExtResource( 4 )]
-origin = Vector2( 0, 0 )
-tip = Vector2( 1, 0 )
 color = Color( 0, 0.133333, 1, 1 )
 
 [node name="Ship2" parent="." instance=ExtResource( 2 )]

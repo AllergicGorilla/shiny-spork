@@ -15,6 +15,7 @@ drag_margin_v_enabled = false
 script = ExtResource( 2 )
 
 [node name="Universe" type="Node2D" parent="."]
+editor/display_folded = true
 script = ExtResource( 3 )
 
 [node name="Area2D" type="Area2D" parent="Universe"]
@@ -29,7 +30,11 @@ disabled = true
 
 [node name="GUI" parent="GUILayer" instance=ExtResource( 4 )]
 [connection signal="body_exited" from="Universe/Area2D" to="Universe" method="_on_Area2D_body_exited"]
+[connection signal="planet_created" from="GUILayer/GUI/Tools/CreatePlanet/ClickAndDragCreator" to="." method="_on_planet_created"]
+[connection signal="planet_created" from="GUILayer/GUI/Tools/CreatePlanet/ThreeStepsCreator" to="." method="_on_planet_created"]
 
 [editable path="GUILayer/GUI"]
 
-[editable path="GUILayer/GUI/PlanetCreatorPanel"]
+[editable path="GUILayer/GUI/Tools"]
+
+[editable path="GUILayer/GUI/Tools/CreatePlanet"]
